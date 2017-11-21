@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient,HttpParams} from '@angular/common/http' 
+import { HttpClient,HttpParams} from '@angular/common/http' ;
+import { Headers, RequestOptions } from '@angular/http';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginService }  from './../shared/login.service';
+
 
 
 @Component({
@@ -8,21 +12,26 @@ import { HttpClient,HttpParams} from '@angular/common/http'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  loginForm : FormGroup;
   results:string;
+  //errors:Errors = new Errors();
 
-  constructor(private http: HttpClient) { }
+  constructor(private loginservice: LoginService,) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+  
 
-    
-    this.http.post('/api/items',{
-      params: new HttpParams().set('id', '3'),
-    }).subscribe(data => {
-      // Read the result field from the JSON response.
-      this.results = data['results'];
-    });
-    
+  }
+
+  login()
+  {
+    const credentials = this.loginForm.value;
+    this.loginservice.attemptAuth(this.loginForm, credentials)
+    .subscribe(
+     // data => this.router.navigateByUrl('/'),
+      err => {
+      //  this.errors = err;
+      });
   }
 
 }

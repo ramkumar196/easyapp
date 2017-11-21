@@ -6,9 +6,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HomeService } from './shared/home.service';
+import { LoginService } from './shared/login.service';
+import { ApiService } from './shared/api.service';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import {HttpClientModule} from '@angular/common/http';
+import { Headers, Http, Response, URLSearchParams } from '@angular/http';
+
 
 
 
@@ -29,10 +33,9 @@ export const ROUTES: Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     RouterModule.forRoot(ROUTES),
   ],
-  providers: [HomeService],
+  providers: [HomeService,LoginService,ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
