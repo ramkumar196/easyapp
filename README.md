@@ -1,0 +1,2 @@
+# easyapp
+Angular Application
